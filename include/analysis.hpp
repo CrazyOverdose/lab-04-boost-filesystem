@@ -116,7 +116,7 @@ public:
 
             std::cout << "lastdate: ";
 
-            std::cout << std::max_element(i.second.begin(), i.second.end(), lastdate)->data;
+std::cout << std::max_element(i.second.begin(), i.second.end(), lastdate)->data;
 
             std::cout << " ";
 
