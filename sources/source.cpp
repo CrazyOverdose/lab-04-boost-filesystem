@@ -1,7 +1,7 @@
 //Copyright 2019 CrazyOverdose
 #include <string>
 #include <iostream>
-#include "analysis.hpp"
+#include "../include/analysis.hpp"
 
 int main(){
     analysis example("misc/ftp");
