@@ -1,3 +1,11 @@
-// Copyright 2018 Your Name <your_email>
+//Copyright 2019 CrazyOverdose
+#include <string>
+#include <iostream>
+#include "analysis.hpp"
 
-#include <header.hpp>
+int main(){
+    analysis example("misc/ftp");
+    example.work("misc/ftp");
+    example.print_name_files();
+    example.print_information();
+}
