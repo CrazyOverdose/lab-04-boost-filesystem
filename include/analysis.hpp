@@ -117,21 +117,6 @@ std::cout << std::max_element(i.second.begin(), i.second.end(), lastdate)->data;
         }
     }
 
-    bool exceptions(std::string file)
-    {
-        bool flag = false;
-
-        if ("balance_" == file.substr(0, 8)){
-            if ('_' == file[16]){
-                if (".txt" == file.substr(25)){
-                    if (std::atoi((file.substr(8, 8)).c_str()) != 0){
-                        if (std::atoi((file.substr(17, 8)).c_str())!= 0)
-                        {
-                            flag = true;
-                        }}}}}
-
-        return flag;}
-
     information parcer(std::string file)
     {
         information new_file;
