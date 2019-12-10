@@ -127,17 +127,16 @@ std::cout << std::max_element(i.second.begin(), i.second.end(), lastdate)->data;
 
         file = file.substr(file.find('_') + 1);
 
-
-        new_file.account = std::stoi(file.substr(0, file.find('_')));
+new_file.account = std::stoi(file.substr(0, file.find('_')));
         file = file.substr(file.find('_') + 1);
 
-        new_file.data.year = std::stoi(file.substr(0,4));
+        new_file.data.year = std::stoi(file.substr(0, 4));
         new_file.data.month = std::stoi(file.substr(4, 2));
         new_file.data.day = std::stoi(file.substr(6, 2));
         file = file.substr(8);
 
         if (file[0] != '.' || file.substr(0, 4) == ".old")
-            throw std::logic_error("");   // Ignored file with wrong syntax or ".old"
+            throw std::logic_error("");
 
         if (file.substr(1).find('.') != std::string::npos)
             throw std::logic_error("");
