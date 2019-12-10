@@ -16,6 +16,7 @@ struct Date {
 struct information {
     std::string title; //название файла
     std:: string broker; //папка
+    std:: string type;
     int account; //аккаунт
     Date data; // дата
 };
@@ -76,14 +77,6 @@ public:
         try {
             information new_file = parcer(path.filename().string());
 
-            std::string path2 = path.string();
-
-            size_t i = path2.rfind('/');
-            path2.erase(i);
-            i = path2.rfind('/');
-
-            new_file.broker = path2.substr(i + 1);
-
             informations.push_back(new_file);
             accounts_groups[new_file.account].push_back(new_file);
         }
@@ -141,28 +134,28 @@ std::cout << std::max_element(i.second.begin(), i.second.end(), lastdate)->data;
 
     information parcer(std::string file)
     {
-        if (!exceptions(file))
-            throw std::logic_error("");
-
         information new_file;
 
         new_file.title = file;
 
-        file.erase(0, 8);
+        new_file.type = file.substr(0, file.find('_'));
 
-        new_file.account = std::atoi((file.substr(0, 8)).c_str());
+        file = file.substr(file.find('_') + 1);
 
-        file.erase(0, 9);
 
-        new_file.data.year = std::atoi((file.substr(0, 4)).c_str());
+        new_file.account = std::stoi(file.substr(0, file.find('_')));
+        file = file.substr(file.find('_') + 1);
 
-        file.erase(0, 4);
+        new_file.data.year = std::stoi(file.substr(0,4));
+        new_file.data.month = std::stoi(file.substr(4, 2));
+        new_file.data.day = std::stoi(file.substr(6, 2));
+        file = file.substr(8);
 
-        new_file.data.month = std::atoi((file.substr(0, 2)).c_str());
+        if (file[0] != '.' || file.substr(0, 4) == ".old")
+            throw std::logic_error("");   // Ignored file with wrong syntax or ".old"
 
-        file.erase(0, 2);
-
-        new_file.data.day = std::atoi((file.substr(0, 2)).c_str());
+        if (file.substr(1).find('.') != std::string::npos)
+            throw std::logic_error("");
 
         return new_file;
     }
